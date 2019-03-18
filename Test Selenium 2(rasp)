@@ -1,0 +1,38 @@
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
+import time
+driver = webdriver.Chrome('C:\\Python34\\chromedriver.exe')
+driver.maximize_window()
+driver.get("http://rasp.yandex.ru")
+time.sleep(15)
+
+driver.find_element_by_xpath('//*[@id="from"]').send_keys('Кемерово')
+
+driver.find_element_by_xpath('//*[@id="to"]').send_keys('Москва')
+
+driver.find_element_by_xpath('//*[@id="when"]').send_keys('7 июля')
+driver.find_element_by_xpath('//*[@id="when"]').send_keys(Keys.ENTER)
+
+
+wait = WebDriverWait(driver, 10)
+element = wait.until(EC.element_to_be_clickable((By.XPATH,'//*[@id="root"]/div/main/div/div[1]/div[1]/div/section/article/header/div')))
+print('Name')
+
+wait = WebDriverWait(driver, 10)
+element = wait.until(EC.element_to_be_clickable((By.XPATH,'//*[@id="root"]/div/main/div/div[1]/div[1]/div/section/article/div[1]/div[1]/div[2]')))
+print('Time')
+
+wait = WebDriverWait(driver, 10)
+element = wait.until(EC.element_to_be_clickable((By.XPATH,'//*[@id="icon-plane"]/path')))
+print('Icon')
+
+
+
+
+assert "No results found." not in driver.page_source
+
