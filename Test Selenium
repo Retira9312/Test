@@ -1,3 +1,4 @@
+#Подготовка, импорт библиотек
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
@@ -7,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 import time
 driver = webdriver.Chrome('..\Python34\\chromedriver.exe')
-
+#Начало теста. 
 driver.maximize_window()
 driver.get("http://цг.рф")
 window_before = driver.window_handles[0]
@@ -24,7 +25,7 @@ window_after = driver.window_handles[1]
 driver.switch_to_window(window_after)
          
  
-
+#time.sleep использую, чтобы страница успела прогрузиться.
 time.sleep(10)
 driver.find_element_by_xpath('//*[@id="app"]/div[2]/section[1]/div/div/div/a[1]/div[2]/div[3]').click()
 driver.find_element_by_xpath('//*[@id="app"]/div[1]/div/div[3]/form/input').send_keys('пицца пепперони')
@@ -39,7 +40,7 @@ print('Availability')
 wait2 = WebDriverWait(driver, 10)
 element = wait2.until(EC.element_to_be_clickable((By.XPATH,'//*[@id="catalog-content"]/div[7]/div/div[2]/button[2]')))
 print('Basket')
-
+#Конец теста
 
 assert "No results found." not in driver.page_source
 
